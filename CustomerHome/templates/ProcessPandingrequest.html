@@ -1,0 +1,194 @@
+{% load static %}
+<!doctype html>
+<html lang="en" style="font-size: 16px;">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Tab Logo -->
+    <link rel="icon" href="{% static 'img/Logos/TabTop2Logo.png' %}" type="image/gif" sizes="18x18">
+
+    <title>Fast Rentals - Panding Request Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/customer.css' %}">
+    <script src="{% static 'js/customer.js' %}" type="text/javascript"></script>
+
+    <style>
+        .carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Responsive Table">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+
+    <link rel="stylesheet" href="{% static 'css/b/nicepage.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/b/Copy-of-Page-2.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'js/b/jquery-1.9.1.min.js' %}" defer="">
+    </script>
+    <script class="u-script" type="text/javascript" src="{% static 'js/b/nicepage.js' %}" defer=""></script>
+     <meta name="generator" content="Nicepage 4.2.6, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+                    <script>
+                    
+
+    function dd(selectObj) { 
+
+ var idx = selectObj.selectedIndex; 
+ var which = selectObj.options[idx].value; 
+ document.getElementById("sdd").value=which;
+ }
+
+ </script>
+
+</head>
+
+<body style="background-color:ghostwhite;">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: larger;" aria-label="" aria-labbelledby="">
+        <a href="/StaffHome/"><img class="navbar-brand" src="{% static 'img/Logos/Logo.png' %}" height="70"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/processpendingrequests/" style="color: #f1f1f1;">Pending Requests</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/showareqall/" style="color: #f1f1f1;">Approved Requests</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/showrreqall/" style="color: #f1f1f1;">Rejected Requests</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <div class="nav-link" href="#" style="color: #f1f1f1;">
+                        {{staff.staff_id}}</div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/StaffLogout/" style="color: #f1f1f1;">
+                        Logout</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="col-sm-10">
+    {%if Message%}
+    <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+        <strong>{{Message}}!!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {%endif%}
+
+
+       <section class="u-align-center u-clearfix u-image u-shading u-section-1" id="sec-caca" data-image-width="1000" data-image-height="800">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+          <table class="u-table-entity">
+            <colgroup>
+              <col width="10.9%">
+              <col width="11.2%">
+              <col width="10.9%">
+              <col width="11.6%">
+              <col width="10.9%">
+              <col width="11.2%">
+              <col width="10.8%">
+              <col width="10.9%">
+              <col width="11.599999999999998%">
+            </colgroup>
+            <thead class="u-palette-5-dark-3 u-table-header u-table-header-1">
+              <tr style="height: 70px;">
+                <!-- <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-1">Request id</th>
+ -->                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-2">customer id</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-3">vehicle id</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-4">customer mobile</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-5">pickup date</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-6">return date</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-7">pickup point</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-8">expected km</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-9">expected price</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-9">availabel drivers</th>
+                <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-9">Process</th>
+              </tr>
+            </thead>
+            <tbody class="u-black u-table-body u-table-body-1">
+                {% for r in requests %}
+              <tr style="height: 66px;">
+                <form  action="/process/" method="post">
+                {%csrf_token%}
+                <!-- <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-10">{{r.request_id}}</td> -->
+                <input type="hidden" name="customer_email" value={{r.customer_email}}>
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-11">{{r.customer_email}}</td>
+                <input type="hidden" name="vehicle_license_plate" value={{r.vehicle_license_plate}}>
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-12">{{r.vehicle_license_plate}}</td>
+                 <input type="hidden" name="mobile_no" value={{r.mobile_no}}>
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-13">{{r.mobile_no}}</td>
+                <input type="hidden" name="pickup_date" value="{{r.pickup_date|date:'Y-m-d'}}">
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-14">{{r.pickup_date}}</td>
+                <input type="hidden" name="return_date" value="{{r.return_date|date:'Y-m-d'}}">
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-15">{{r.return_date}}</td>
+                <input type="hidden" name="pickup_point" value={{r.pickup_point}}>
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-16">{{r.pickup_point}}</td>
+                <input type="hidden" name="estimated_km" value={{r.estimated_km}}>
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-17">{{r.estimated_km}}</td>
+                <input type="hidden" name="estimated_price" value={{r.estimated_price}}>
+                <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-18">{{r.estimated_price}}</td>
+                
+                <td>
+                    
+                    <input type='hidden' id="sdd" name="sd" value="hehe">
+                    <select id="driverr" style="background-color:black;" onchange="dd(this);">
+                    <option selected disabled>Choose a driver</option>
+                    {% for d in drivers %}
+                    <option value={{d.dirver_id}}>{{d.driver_name}}</option>
+                    {% endfor %}
+                    </select>
+                    
+                    
+                
+
+                </td>
+                   
+                <td>
+                    <input type="submit" value="Process" name="Process" style="background-color:black;">
+                </td>
+                </form>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+</body>
+
+</html>

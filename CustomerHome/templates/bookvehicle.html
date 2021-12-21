@@ -1,0 +1,407 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Tab Logo -->
+    <link rel="icon" href="{% static 'img/Logos/TabTop2Logo.png' %}" type="image/gif" sizes="18x18">
+
+    <title>Vehicle Rentals - Book Vehicle</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/customer.css' %}">
+    <script src="{% static 'js/customer.js' %}" type="text/javascript"></script>
+
+</head>
+
+<body>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: larger;" aria-label="" aria-labbelledby="">
+        <a href="/CustomerHome/"><img class="navbar-brand" src="{% static 'img/Logos/Logo.png' %}" height="70"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/bookvehicle/" style="color: #f1f1f1;">Book Vehicle</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/pendingrequests/" style="color: #f1f1f1;">Pending Requests</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color: #f1f1f1;">Approved Requests</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <div class="nav-link" href="/Logout" style="color: #f1f1f1;">
+                        {{customer.customer_email}}</div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Logout/" style="color: #f1f1f1;">
+                        Logout</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- Side bar -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2" style="height: auto; background-color: #f1f1f1;" id="demo">
+                <div class="row">
+                    <div class="col-sm mt-2">
+                        <label class="sr-only" for="inlineFormInputGroup">Search</label>
+                        <div class="input-group mb-2">
+                            <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm mt-2">
+                        <form  action="/filterbookvehicle/" method="post">
+                            {%csrf_token%}
+                            <strong>Vehicles</strong>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Car" name="car">
+                                {%if message%}
+                                {%if 'car' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("Car").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Car" value="Car">Car</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Two wheeler" name="two_wheeler" >
+                                {%if message%}
+                                {%if 'two_wheeler' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("Two wheeler").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Bike" value="Two wheeler">Two wheeler</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Bus" name="bus">
+                                {%if message%}
+                                {%if 'bus' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("Bus").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Bus" value="Bus">Bus</label>
+                            </div>
+
+
+                            <strong>Company</strong>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="suzuki" name="suzuki">
+                                {%if message%}
+                                {%if 'suzuki' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("suzuki").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Maruti"  value="Suzuki">Suzuki</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="honda" name="honda">
+                                {%if message%}
+                                {%if 'honda' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("honda").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Audi"  value="Honda">Honda</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="hyndai" name="hyndai">
+                                {%if message%}
+                                {%if 'hyndai' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("hyndai").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Mercedes"  value="Hyndai">Hyundai</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="volksvagen" name="volksvagen">
+                                {%if message%}
+                                {%if 'volksvagen' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("volksvagen").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Toyato"  value="Volksvagen">Volkswagen</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="mahindra" name="mahindra">
+                                {%if message%}
+                                {%if 'mahindra' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("mahindra").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Tata"  value="Mahindra">Mahindra</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="tata" name="tata">
+                                {%if message%}
+                                {%if 'tata' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("tata").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Tata"  value="Tata">Tata</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="volvo" name="volvo">
+                                {%if message%}
+                                {%if 'volvo' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("volvo").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Kia" value="Volvo">Volvo</label>
+                            </div>
+
+
+                             <strong>No. of seats</strong>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="1_2" name="1_2">
+                                {%if message%}
+                                {%if '1_2' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("1_2").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Maruti"  value="1-2">1-2</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="3_5" name="3_5">
+                                {%if message%}
+                                {%if '3_5' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("3_5").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Audi"  value="3-5">3-5</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="6_8"  name="6_8">
+                                {%if message%}
+                                {%if '6_8' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("6_8").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Mercedes" value="6-8">6-8</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="25" name="25">
+                                {%if message%}
+                                {%if '25' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("25").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Toyato"  value="25">9+</label>
+                            </div>
+
+                            <strong>Fuel Type</strong>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="petrol" name="petrol">
+                                {%if message%}
+                                {%if 'petrol' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("petrol").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Petrol"  value="Petrol">Petrol</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="diesel" name="diesel">
+                                {%if message%}
+                                {%if 'diesel' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("diesel").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Diesel"  value="Diesel">Diesel</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="cng" name="cng" >
+                                {%if message%}
+                                {%if 'cng' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("cng").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="CNG" value="CNG">CNG</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="electric" name="electric">
+                                {%if message%}
+                                {%if 'electric' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("electric").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Electric"  value="Electric">Electric</label>
+                            </div>
+
+                            <strong>Price range</strong>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="30" name="30" >
+                                {%if message%}
+                                {%if '30' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("30").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Petrol" value="30">Under ₹30</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="50" name="50">
+                                {%if message%}
+                                {%if '50' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("50").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Diesel"  value="50">Under ₹50</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="100" name="100">
+                                {%if message%}
+                                {%if '100' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("100").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="CNG"  value="100">Under ₹100</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="100+" name="100+">
+                                {%if message%}
+                                {%if '100+' in message%}
+                                <script type="text/javascript">
+                                    document.getElementById("100+").checked=true;
+                                </script>
+                                {%endif%}
+                                {%endif%}
+                                <label class="form-check-label" for="Electric"  value="100+">Above ₹100</label>
+                            </div>
+                            <div class="u-align-left u-form-group u-form-submit">
+                  <br>
+                  <input type="submit" class="u-form-control-hidden" value="Apply" name="apply">
+                </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+    <div class="col-sm-10">
+    {%if Message%}
+    <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+        <strong>{{Message}}!!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {%endif%}
+    <div class="container">
+        <div class="row">
+
+            {% for v in vehicle %}
+            <div class="col-sm-4 my-5">
+                <div class="card Boxshadow h-100" style="width: 18rem;">
+                    <div id="Vehicle_{{v.Vehicle_license_plate}}" class="carousel slide" data-interval="false">
+                        <!-- <ol class="carousel-indicators">
+                            <li data-target="#Vehicle_{{v.Vehicle_license_plate}}" data-slide-to="0" class="active"></li>
+                            <li data-target="#Vehicle_{{v.Vehicle_license_plate}}" data-slide-to="1"></li>
+                            <li data-target="#Vehicle_{{v.Vehicle_license_plate}}" data-slide-to="2"></li>
+                        </ol> -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{v.Vehicle_image1.url}}" alt="First slide" style="height:200px">
+                            </div>
+                            <!-- <div class="carousel-item">
+                                <img class="d-block w-100" src="{{v.Vehicle_image2.url}}" alt="Second slide" style="height:200px">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="{{v.Vehicle_image3.url}}" alt="Third slide" style="height:200px">
+                            </div> -->
+                        </div>
+                        <!-- <a class="carousel-control-prev" href="#Vehicle_{{v.Vehicle_license_plate}}" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#Vehicle_{{v.Vehicle_license_plate}}" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a> -->
+                    </div>
+                    <div class="card-body ">
+                        <h5 class="card-title ">{{v.Vehicle_name}}</h5>
+                        <hr>
+                        <p class="card-text "><mark><em>Model:</em></mark> {{v.Vehicle_model}}</p>
+                        <p class="card-text "><mark><em>Price (per km):</em></mark> ₹ {{v.Vehicle_price}}</p>
+                        <a href="{% url 'VehicleDetails' v.Vehicle_license_plate %}" class="btn btn-primary " >Show Details & Book</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
